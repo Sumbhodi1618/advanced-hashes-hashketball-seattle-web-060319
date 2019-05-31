@@ -156,17 +156,10 @@ def team_names
        return array
 end
   
-def player_numbers(team_name)
-    result = []
-    game_hash.each do |origin, team|
-        team[:players].each do |name, stats| 
-            if team[:team_name] == team_name
-                result << team[:players][name][:number]
-            end
-        end
-    end
-    return result
-end
+def team_names
+  game_hash.values.map {|value| value[:team_name]}
+
+ end
 
 def player_stats(player_name)
     game_hash.each do |origin, team|
@@ -181,14 +174,14 @@ def big_shoe_rebounds
     largest_shoe = 0
     rebounds = 0
     player = ""
-    game_hash.each do |origin, team|
-        team[:players].each do |name, stats|
-            if largest_shoe < shoe_size(name)
-                largest_shoe = shoe_size(name)
-                player = name
-            end
+game_hash.each do |origin, team|
+  team[:players].each do |name, stats|
+      if largest_shoe < shoe_size(name)
+        largest_shoe = shoe_size(name)
+          player = name
         end
-    end
+      end
+  end
     return player_stats(player)[:rebounds]
 end
 
